@@ -49,7 +49,6 @@
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                         <select class="border border-gray-200 rounded p-2 w-full" name="type">
-                                            <option>Please select type</option>
                                             @foreach($types as $type)
                                                 <option value="{{$type->name}}">{{$type->name}}</option>
                                             @endforeach

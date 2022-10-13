@@ -11,7 +11,6 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
-    @vite('resources/css/app.css')
 </head>
 <body>
 @include('partials._navbar')

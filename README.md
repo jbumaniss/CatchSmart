@@ -1,6 +1,6 @@
 # Warehouse Register App
 
-# Used PHP 8/PHP Extensions For Laravel and etc/Laravel 9/Alpine.js 2.8.2/MySql 8
+# Used PHP 8/PHP Extensions For Laravel and etc/Laravel 9/Tailwind 3 CDN/ Alpine.js 2.8.2 CDN/MySql 8
 
 
 ---
@@ -77,7 +77,7 @@ cp .env.example .env
 composer install
 ```
 
-#### if a command failed because of requirements try this command instead:
+#### if command is failed because of requirements, try this command instead:
 
 ```
 composer install --ignore-platform-reqs
@@ -94,7 +94,15 @@ php artisan key:generate
 ```
 php artisan migrate
 ```
+#### a. As database does not exist in MySql database, terminal will ask you to make new database: type `yes` and hit enter
 
+---
+
+## Create new database
+
+![Screenshot](databasecreate.png)
+
+---
 
 ### 9. NOT REQUIRED! Populate database with fake table data:
 

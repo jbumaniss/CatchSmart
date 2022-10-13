@@ -100,7 +100,7 @@ php artisan migrate
 
 ## Create new database
 
-![Screenshot](databasecreate.png)
+![Screenshot](dbcreate.png)
 
 ---
 

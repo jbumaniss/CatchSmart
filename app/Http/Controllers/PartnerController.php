@@ -52,10 +52,10 @@ class PartnerController extends Controller
         return redirect('/manage/partners')->with('message', 'Partner created successfully');
     }
 
-    public function edit(Partner $id): View
+    public function edit(Partner $partner): View
     {
         return view('partner.edit', [
-            'partner' => $id
+            'partner' => $partner
         ]);
     }
 

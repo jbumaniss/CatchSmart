@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WarehouseController::class, 'index'])->name("warehouse.index");
 
 Route::resource('partners', PartnerController::class);
-
 Route::resource('types', TypeController::class);
-
 Route::resource('products', ProductController::class);
 
 Route::get('/orders', [OrderController::class, 'index'])->name("orders.index");
-Route::put('/orders/{partner}/sold/{product}', [OrderController::class, 'sold'])->name("orders.sold");
+Route::put('/orders/{partner}/{product}', [OrderController::class, 'sold'])->name("orders.sold");
 
 Route::get('/manage', [ManagementController::class, 'index'])->name("manage.index");
 Route::get('/manage/partners', [ManagementController::class, 'partners'])->name("manage.partners");

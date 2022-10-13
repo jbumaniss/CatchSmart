@@ -11,6 +11,7 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
 </head>
 <body>
 @include('partials._navbar')

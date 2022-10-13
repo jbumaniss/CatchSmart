@@ -34,10 +34,10 @@ class TypeController extends Controller
         return redirect('/manage/types')->with('message', 'Type created successfully');
     }
 
-    public function edit(Type $id): View
+    public function edit(Type $type): View
     {
         return view('type.edit', [
-            'type' => $id
+            'type' => $type
         ]);
     }
 

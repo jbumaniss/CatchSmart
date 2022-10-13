@@ -28,11 +28,12 @@ class OrderController extends Controller
 
     public function sold(Partner $partner, Product $product, Request $request): RedirectResponse
     {
+
         $formFields = $request->validate([
             'quantity' => "required_if:type,Product | numeric | gt:0 | max:{$product->quantity}",
         ]);
 
         $this->orderService->soldOrder($partner, $product, $formFields);
-        return redirect('/partner/' . $partner->id)->with('message', 'Product sold to ' . $partner->name . ' successfully');
+        return redirect('/partners/' . $partner->id)->with('message', 'Product sold to ' . $partner->name . ' successfully');
     }
 }

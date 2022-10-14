@@ -45,7 +45,15 @@
 ### 1. In your chosen directory open terminal app
 #### Terminal should be open in chosen directory root!
 
-### 2. Clone or download with Git to your chosen directory with this command:
+### 2. Initialize Git to your chosen directory with this command:
+
+```
+
+git init
+
+```
+
+### 3. Clone or download with Git to your chosen directory with this command:
 
 ```
 
@@ -53,9 +61,9 @@ git pull https://github.com/jbumaniss/CatchSmart.git
 
 ```
 
-### 3. Open chosen directory root with your chosen editor.
+### 4. Open chosen directory root with your chosen editor.
 
-### 4. Rename .env.example file from your chosen directory root to .env in same directory with this command:
+### 5. Rename .env.example file from your chosen directory root to .env in same directory with this command:
 
 ```
 
@@ -64,14 +72,14 @@ cp .env.example .env
 ```
 
 
-### 5. Next fill the renamed .env file from your app core directory with your credentials:
+### 6. Next fill the renamed .env file from your app core directory with your credentials:
 
 #### a.DB_HOST=your_mysql_ip_address
 #### b.DB_DATABASE=your_databases_name
 #### c.DB_USERNAME=your_mysql_database_username
 #### d.DB_PASSWORD=your_mysql_database_password if is set if not leave empty
 
-### 6. Run composer install to install required packages
+### 7. Run composer install to install required packages
 
 ```
 composer install
@@ -83,13 +91,13 @@ composer install
 composer install --ignore-platform-reqs
 ```
 
-### 7. Generate app key with this command:
+### 8. Generate app key with this command:
 
 ```
 php artisan key:generate
 ```
 
-### 8. Migrate database migrations to fill your database with all the necessary tables and columns:
+### 9. Migrate database migrations to fill your database with all the necessary tables and columns:
 
 ```
 php artisan migrate
@@ -104,13 +112,13 @@ php artisan migrate
 
 ---
 
-### 9. NOT REQUIRED! Populate database with fake table data:
+### 10. NOT REQUIRED! Populate database with fake table data:
 
 ```
 php artisan db:seed
 ```
 
-### 10. Run the App command:
+### 11. Run the App command:
 
 ````
 php artisan serv
@@ -128,8 +136,4 @@ php artisan serv
 ####  or for shortcut press ctrl and left mouse button in your terminal on your generated address should open browser with served page
 
 ---
-
-
-
-
 

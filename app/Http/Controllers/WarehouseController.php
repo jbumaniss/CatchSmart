@@ -10,7 +10,7 @@ class WarehouseController extends Controller
     public function index():View
     {
         return view('warehouse.index',[
-            "partners" => Partner::latest()->get()
+            "partners" => Partner::latest()->paginate(6)
         ] );
     }
 }

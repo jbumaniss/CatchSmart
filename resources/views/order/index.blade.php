@@ -75,4 +75,7 @@
             </div>
         </div>
     </div>
+    <div class="mt-6 p-4">
+        {{$orders->links() }}
+    </div>
 </x-layout>

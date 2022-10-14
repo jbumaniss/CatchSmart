@@ -4,11 +4,14 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CreateTypeRequest;
+use App\Http\Requests\UpdateTypeRequest;
 use App\Models\Type;
 use App\Services\TypeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class TypeController extends Controller
 {
@@ -24,14 +27,15 @@ class TypeController extends Controller
         return view('type.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(CreateTypeRequest $request): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required'
-        ]);
-
-        $this->typeService->storeType($formFields);
-        return redirect('/manage/types')->with('message', 'Type created successfully');
+        try {
+            $this->typeService->storeType($request);
+            return redirect('/manage/types')->with('message', 'Type created successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/types')->with('message', 'Type create failed');
+        }
     }
 
     public function edit(Type $type): View
@@ -41,19 +45,25 @@ class TypeController extends Controller
         ]);
     }
 
-    public function update(Request $request, Type $type): RedirectResponse
+    public function update(UpdateTypeRequest $request, Type $type): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required'
-        ]);
-
-        $this->typeService->updateType($type, $formFields);
-        return redirect('/manage/types')->with('message', 'Type updated successfully');
+        try {
+            $this->typeService->updateType($type, $request);
+            return redirect('/manage/types')->with('message', 'Type updated successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/types')->with('message', 'Type update failed');
+        }
     }
 
     public function destroy(Type $type): RedirectResponse
     {
-        $this->typeService->deleteType($type);
-        return redirect('/manage/types')->with('message', 'Type deleted successfully');
+        try {
+            $this->typeService->deleteType($type);
+            return redirect('/manage/types')->with('message', 'Type deleted successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/types')->with('message', 'Type delete failed');
+        }
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CreatePartnerRequest;
+use App\Http\Requests\UpdatePartnerRequest;
 use App\Models\Partner;
 use App\Models\Product;
 use App\Services\PartnerService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class PartnerController extends Controller
 {
@@ -22,34 +25,34 @@ class PartnerController extends Controller
 
     public function index(): View
     {
-        return view('partner.index',[
-            "partners" => Partner::latest()->get()
-        ] );
+        return view('partner.index', [
+            "partners" => Partner::latest()->paginate(6)
+        ]);
     }
 
     public function show(Partner $partner): View
-   {
-       return view('partner.show', [
-           'partner' => $partner,
-           'products' => Product::latest()->get(),
-           'orders' => $partner->order()->get(),
-       ]);
-   }
+    {
+        return view('partner.show', [
+            'partner' => $partner,
+            'products' => Product::latest()->get(),
+            'orders' => $partner->order()->get(),
+        ]);
+    }
 
     public function create(): View
     {
         return view('partner.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(CreatePartnerRequest $request): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'address' => 'required'
-        ]);
-
-        $this->partnerService->storePartner($formFields);
-        return redirect('/manage/partners')->with('message', 'Partner created successfully');
+        try {
+            $this->partnerService->storePartner($request);
+            return redirect('/manage/partners')->with('message', 'Partner created successfully');
+        } catch (Throwable $exception) {
+            report($exception);
+            return redirect('/manage/partners')->with('message', 'Partner create failed');
+        }
     }
 
     public function edit(Partner $partner): View
@@ -59,22 +62,25 @@ class PartnerController extends Controller
         ]);
     }
 
-    public function update(Request $request, Partner $partner): RedirectResponse
+    public function update(UpdatePartnerRequest $request, Partner $partner): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'address' => 'required'
-        ]);
-
-        $this->partnerService->updatePartner($partner, $formFields);
-        return redirect('/manage/partners')->with('message', 'Partner updated successfully');
+        try {
+            $this->partnerService->updatePartner($partner, $request);
+            return redirect('/manage/partners')->with('message', 'Partner updated successfully');
+        } catch (Throwable $exception) {
+            report($exception);
+            return redirect('/manage/partners')->with('message', 'Partner updated failed');
+        }
     }
 
     public function destroy(Partner $partner): RedirectResponse
     {
-
-        $this->partnerService->deletePartner($partner);
-        return redirect('/manage/partners')->with('message', 'Partner deleted successfully');
+        try {
+            $this->partnerService->deletePartner($partner);
+            return redirect('/manage/partners')->with('message', 'Partner deleted successfully');
+        } catch (Throwable $exception) {
+            report($exception);
+            return redirect('/manage/partners')->with('message', 'Partner delete failed');
+        }
     }
-
 }

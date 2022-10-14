@@ -6,6 +6,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Type;
@@ -13,6 +15,7 @@ use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -27,7 +30,7 @@ class ProductController extends Controller
     public function index(): View
     {
         return view('product.index',[
-            "products" => Product::latest()->get()
+            "products" => Product::latest()->paginate(6)
         ] );
     }
 
@@ -46,19 +49,15 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CreateProductRequest $request): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'type' => 'required',
-            'price' => 'required | numeric',
-            'description' => 'required',
-            'quantity' => 'required_if:type,Product'
-        ]);
-
-
-        $this->productService->storeProduct($formFields);
-        return redirect('/manage/products')->with('message', 'Product created successfully');
+        try {
+            $this->productService->storeProduct($request);
+            return redirect('/manage/products')->with('message', 'Product created successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/products')->with('message', 'Product create failed');
+        }
     }
 
     public function edit(Product $product): View
@@ -69,24 +68,25 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        $formFields = $request->validate([
-            'name' => 'required',
-            'type' => 'required',
-            'price' => 'required | numeric',
-            'description' => 'required',
-            "quantity" => 'required_if:type,Product'
-        ]);
-
-
-        $this->productService->updateProduct($product, $formFields);
-        return redirect('/manage/products')->with('message', 'Product updated successfully');
+        try {
+            $this->productService->updateProduct($product, $request);
+            return redirect('/manage/products')->with('message', 'Product updated successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/products')->with('message', 'Product updated failed');
+        }
     }
 
     public function destroy(Product $product): RedirectResponse
     {
-        $this->productService->deleteProduct($product);
-        return redirect('/manage/products')->with('message', 'Product deleted successfully');
+        try {
+            $this->productService->deleteProduct($product);
+            return redirect('/manage/products')->with('message', 'Product deleted successfully');
+        }catch(Throwable $exception){
+            report($exception);
+            return redirect('/manage/products')->with('message', 'Product delete failed');
+        }
     }
 }

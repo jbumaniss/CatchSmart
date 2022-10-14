@@ -10,32 +10,32 @@ use Illuminate\View\View;
 class ManagementController extends Controller
 {
 
-    public function index():View
+    public function index(): View
     {
-        return view('management.index',[
-            "partners" => Partner::get(),
-            "products" => Product::get()
-        ] );
+        return view('management.index', [
+            "partners" => Partner::latest()->paginate(6),
+            "products" => Product::latest()->paginate(6)
+        ]);
     }
 
-    public function partners():View
+    public function partners(): View
     {
-        return view('management.partners',[
-            "partners" => Partner::get()
-        ] );
+        return view('management.partners', [
+            "partners" => Partner::latest()->paginate(6)
+        ]);
     }
 
-    public function types():View
+    public function types(): View
     {
-        return view('management.types',[
-            "types" => Type::get()
-        ] );
+        return view('management.types', [
+            "types" => Type::latest()->paginate(6)
+        ]);
     }
 
-    public function products():View
+    public function products(): View
     {
-        return view('management.products',[
-            "products" => Product::get()
-        ] );
+        return view('management.products', [
+            "products" => Product::latest()->paginate(6)
+        ]);
     }
 }

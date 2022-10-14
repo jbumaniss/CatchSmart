@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto shadow-xl rounded p-2">
     <h1 class="m-12 text-center text-2xl font-bold">Products</h1>
 
     <div class="text-end">

@@ -12,6 +12,7 @@
         referrerpolicy="no-referrer"
     />
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 @include('partials._navbar')

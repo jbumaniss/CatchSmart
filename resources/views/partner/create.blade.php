@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="m-12 text-center text-2xl font-bold">Add Partner</h1>
 
-    <div class="container mx-auto mb-12">
+    <div class="container mx-auto mb-12 shadow-xl rounded p-2">
         <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">

@@ -33,12 +33,24 @@
                             @if(count($orders) > 0)
                                 @foreach($orders as $order)
                                     <tr class="border-b">
+                                        @if($order->product->trashed())
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{$order->product->name}} <p class="text-red-600">DELETED PRODUCT!!!</p>
+                                            </td>
+                                        @else
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <a href="{{ route('partners.show', $order->partner_id) }}">{{$order->product->name}}</a>
+                                            </td>
+                                        @endif
+                                        @if($order->partner->trashed())
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('products.show', $order->product_id) }}">{{$order->name}}</a>
+                                            {{$order->partner->name}} <p class="text-red-600">DELETED PARTNER!!!</p>
                                         </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('partners.show', $order->partner_id) }}">{{$order->partner->name}}</a>
-                                        </td>
+                                        @else
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <a href="{{ route('partners.show', $order->partner_id) }}">{{$order->partner->name}}</a>
+                                            </td>
+                                        @endif
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{$order->type}}
                                         </td>

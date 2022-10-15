@@ -69,7 +69,7 @@
                                         <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="text-red-600">
+                                            <button class="text-red-600" onclick ="return confirm('Do you want to delete this product?')">
                                                 <i class="fa-solid fa-trash-can"></i>
                                                 Delete
                                             </button>

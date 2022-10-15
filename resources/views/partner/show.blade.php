@@ -106,7 +106,11 @@
                                                 @endif
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <button class="bg-blue-300 text-white rounded py-2 px-4 hover:bg-blue-400" type="submit">Sell</button>
+                                                <button
+                                                    class="bg-blue-300 text-white rounded py-2 px-4 hover:bg-blue-400"
+                                                    type="submit"
+                                                    onclick ="return confirm('Do you want to delete this user?')"
+                                                >Sell</button>
                                             </td>
                                             </form>
                                         </tr>

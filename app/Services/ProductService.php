@@ -16,8 +16,7 @@ class ProductService
 
     public function storeProduct(CreateProductRequest $request): void
     {
-        $defaultWarehouse = Warehouse::where("id", 1)->firstorCreate(["name" => "WareHouse", "address" => 'Latvia'])->id;
-
+        $defaultWarehouse = Warehouse::firstorCreate(["name" => "WareHouse", "address" => 'K.Valdemāra iela 11a Riga, LV-1364'])->id;
         Product::create([
                 'type_id' => Type::where('name', $request->type)->first()->id,
                 'warehouse_id' => $defaultWarehouse,

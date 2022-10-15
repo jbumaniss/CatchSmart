@@ -139,3 +139,4 @@ php artisan serv
 
 #### Background image is located /public/images/blurredwhite.jpg!
 #### Check /public/css/style.css background-image path be the same as your development server if your path differs change accordingly!
+#### Models uses soft delete!

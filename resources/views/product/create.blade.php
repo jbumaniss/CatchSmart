@@ -53,6 +53,9 @@
                                                 <option value="{{$type->name}}">{{$type->name}}</option>
                                             @endforeach
                                         </select>
+                                        @error('type')
+                                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                        @enderror
                                     </td>
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                         <label>

@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Requests\CreateTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
 use App\Models\Type;
 
@@ -11,7 +12,7 @@ use App\Models\Type;
 class TypeService
 {
 
-    public function storeType(UpdateTypeRequest $request): void
+    public function storeType(CreateTypeRequest $request): void
     {
         Type::create([
             "name" => $request->name

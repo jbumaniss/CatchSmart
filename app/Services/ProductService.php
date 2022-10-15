@@ -16,31 +16,27 @@ class ProductService
 
     public function storeProduct(CreateProductRequest $request): void
     {
-        $defaultWarehouse = Warehouse::where("id", 1)->firstorCreate(["name" => "WareHouse", "address" => 'Latvia']);
+        $defaultWarehouse = Warehouse::where("id", 1)->firstorCreate(["name" => "WareHouse", "address" => 'Latvia'])->id;
 
         Product::create([
-            [
+                'type_id' => Type::where('name', $request->type)->first()->id,
+                'warehouse_id' => $defaultWarehouse,
                 'name' => $request->name,
                 'type' => $request->type,
                 'price' => $request->price,
-                'description' => $request->description,
                 'quantity' => $request->quantity,
-                'type_id' => Type::where('name', $_POST['type'])->first()->id,
-                'warehouse_id' => $defaultWarehouse->id
-            ]
+                'description' => $request->description
         ]);
     }
 
     public function updateProduct(Product $product, UpdateProductRequest $request): void
     {
         $product->update([
-            [
                 'name' => $request->name,
                 'type' => $request->type,
                 'price' => $request->price,
                 'description' => $request->description,
                 "quantity" => $request->quantity
-            ]
         ]);
     }
 

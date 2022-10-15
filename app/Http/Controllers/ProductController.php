@@ -13,7 +13,6 @@ use App\Models\Product;
 use App\Models\Type;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Throwable;
 

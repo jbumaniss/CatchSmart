@@ -34,8 +34,8 @@ class PartnerController extends Controller
     {
         return view('partner.show', [
             'partner' => $partner,
-            'products' => Product::latest()->get(),
-            'orders' => $partner->order()->get(),
+            'products' => Product::latest()->paginate(6),
+            'orders' => $partner->order()->latest()->paginate(6),
         ]);
     }
 

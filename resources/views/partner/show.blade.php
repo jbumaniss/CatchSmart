@@ -131,6 +131,9 @@
                 </div>
             </div>
         </div>
+        <div class="mt-6 p-4">
+            {{$products->links() }}
+        </div>
 
         <h1 class="m-12 text-center text-2xl font-bold">Warehouse Sold Products To: {{$partner->name}}</h1>
 
@@ -204,5 +207,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="mt-6 p-4">
+        {{$orders->links() }}
     </div>
 </x-layout>

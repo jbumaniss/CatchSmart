@@ -148,7 +148,8 @@ php artisan order:truncate
 
 ```
 
-#### For some Inspirational quotes every in console use this command:
+#### Laravel schedule demo:
+#### Inspirational quote in warehouse page use this command:
 
 ```
 

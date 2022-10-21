@@ -23,10 +23,8 @@ class PartnerService
     public function updatePartner(Partner $partner, UpdatePartnerRequest $request): void
     {
         $partner->update([
-            [
                 'name' => $request->name,
-                'address' => $request->address
-            ]
+                'address' => $request->address 
         ]);
     }
 
